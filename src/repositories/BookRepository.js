@@ -1,7 +1,9 @@
 const { v4: uuidv4 } = require('uuid');
+const IBookRepository = require('./IBookRepository');
 
-class BookRepository {
+class BookRepository extends IBookRepository {
     constructor() {
+        super();
         this.books = new Map();
     }
 

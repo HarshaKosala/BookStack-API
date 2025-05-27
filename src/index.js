@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const BookRepository = require('./repositories/BookRepository');
+const BookRepositoryFactory = require('./repositories/BookRepositoryFactory');
 const BookService = require('./services/BookService');
 const BookController = require('./controllers/BookController');
 const errorHandler = require('./middleware/errorHandler');
@@ -28,7 +28,9 @@ app.use(morgan(process.env.LOG_FORMAT || 'dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const bookRepository = new BookRepository();
+// Dependency Injection with Factory
+const repositoryType = process.env.REPOSITORY_TYPE || 'memory';
+const bookRepository = BookRepositoryFactory.createRepository(repositoryType);
 const bookService = new BookService(bookRepository);
 const bookController = new BookController(bookService);
 
@@ -55,4 +57,5 @@ app.use(errorHandler);
 // Start server
 app.listen(port, () => {
   logger.info(`Server is running on port ${port} in ${process.env.NODE_ENV || 'development'} mode`);
+  logger.info(`Using ${repositoryType} repository`);
 }); 

@@ -33,6 +33,30 @@ A RESTful API for managing a collection of books, built with Node.js and Express
 }
 ```
 
+## Environment Configuration
+
+Create a `.env` file in the root directory with the following variables:
+
+### Development Environment
+```env
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+
+# API Configuration
+API_PREFIX=/api
+
+# Security
+CORS_ORIGIN=http://localhost:3000
+
+# Logging
+LOG_LEVEL=debug
+LOG_FORMAT=dev
+
+# Repository
+REPOSITORY_TYPE=memory
+```
+
 ## Setup
 
 1. Install dependencies:
