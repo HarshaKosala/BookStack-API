@@ -12,7 +12,10 @@ describe('Book Model', () => {
         };
         
         const validatedData = Book.validate(bookData);
-        expect(validatedData).toEqual(bookData);
+        expect(validatedData).toEqual({
+            ...bookData,
+            publishedDate: new Date(bookData.publishedDate).toISOString()
+        });
     });
 
     test('should throw error for invalid book data', () => {

@@ -37,14 +37,13 @@ A RESTful API for managing a collection of books, built with Node.js and Express
 
 Create a `.env` file in the root directory with the following variables:
 
-### Development Environment
 ```env
 # Server Configuration
 PORT=3000
 NODE_ENV=development
 
 # API Configuration
-API_PREFIX=/api
+API_PREFIX=/bookstack-api
 
 # Security
 CORS_ORIGIN=http://localhost:3000

@@ -19,10 +19,20 @@ class Book {
     }
 
     static validate(bookData) {
-        const { error, value } = this.validationSchema.validate(bookData, { abortEarly: false });
+        const { error, value } = this.validationSchema.validate(bookData, { 
+            abortEarly: false,
+            convert: true
+        });
+        
         if (error) {
             throw new Error(error.details.map(detail => detail.message).join(', '));
         }
+
+        // Ensure publishedDate is always a string in ISO format
+        if (value.publishedDate instanceof Date) {
+            value.publishedDate = value.publishedDate.toISOString();
+        }
+
         return value;
     }
 }
